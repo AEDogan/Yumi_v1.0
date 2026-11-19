@@ -1,8 +1,31 @@
-# Yumi v1.0 — masaüstü sesli asistan
+# Yumi v1.0 — masaüstünde yaşayan Türkçe sesli asistan
 
-Windows masaüstünde yaşayan, Türkçe konuşan sesli asistan. Python + PySide6 arayüz, yerel ses tanıma (Whisper),
-yerel ses üretimi (XTTS), yerel komut anlama, Gemini/ChatGPT web sohbeti, YouTube/müzik, alarm/sayaç, akıllı ev
-cihazları ve isteğe bağlı 3D karakter (VRM) paketleri.
+Yumi, Windows masaüstünde dolaşan, seni dinleyip Türkçe konuşan bir asistan. Ses tanıma, ses üretimi ve komut
+anlama **bilgisayarında yerel** çalışır; sohbet için Gemini/ChatGPT web oturumunu kullanır. İstersen bir 3D karakter
+seçersin: masaüstünde yürür, koltuğa oturur, kendi sesiyle konuşur.
+
+> **English:** A Turkish-speaking desktop voice assistant for Windows with local speech recognition (Whisper), local
+> TTS (XTTS), a local intent model, smart-home control and optional 3D VRM characters with their own voices.
+
+## Neler yapar
+- 🎙️ **Sesli konuşma** — adıyla seslen, konuş; yerel Whisper dinler, yerel XTTS cevap verir.
+- 🧠 **Yerel komut anlama** — alarm, sayaç, müzik, YouTube, ev komutları internete gitmeden.
+- 💬 **Sohbet** — Gemini / ChatGPT web oturumu üzerinden.
+- 🏠 **Akıllı ev** — ağdaki cihazları bulur, panelden ve sesle yönetir.
+- 🎵 **YouTube ve müzik** — reklam atlama eklentisiyle; müziğe göre hareket.
+- 🧍 **3D karakterler (VRM)** — masaüstünde gezinir, oturur, her karakter kendi sesiyle konuşur.
+- 📎 **Clippy** — klasik ofis asistanı, 43 animasyonuyla.
+
+## Karakter paketleri
+Karakterler ayrı indirilir: **[Yumi Models → Releases](https://github.com/AEDogan/yumi-models/releases)**
+
+| Paket | İçerik |
+|---|---|
+| Anime seti | 10 karakter (VRM), her biri kendi ince ayarlı sesiyle |
+| Retro | Clippy — HD ya da klasik |
+
+Kurulum: paketi indir → Yumi'de **Model → + Paket ekle** (ya da dosyayı pencereye sürükle). Ayrıntı ve lisanslar
+[yumi-models](https://github.com/AEDogan/yumi-models) sayfasında.
 
 Bu depo **yalnız kaynak kodu** içerir. Kurulum dosyası (Inno Setup), Python ortamları, ana modül modelleri
 (Whisper, niyet, XTTS taban, varsayılan Yumi sesi) ve karakter paketleri depoda yoktur.
