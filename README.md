@@ -22,7 +22,6 @@ Karakterler ayrı indirilir: **[Yumi Models → Releases](https://github.com/AED
 | Paket | İçerik |
 |---|---|
 | Anime seti | 10 karakter (VRM), her biri kendi ince ayarlı sesiyle |
-| Retro | Clippy — HD ya da klasik |
 
 Kurulum: paketi indir → Yumi'de **Model → + Paket ekle** (ya da dosyayı pencereye sürükle). Ayrıntı ve lisanslar
 [yumi-models](https://github.com/AEDogan/yumi-models) sayfasında.
