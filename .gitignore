@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.log
+/.venv/
+/runtime/
+/models/
+/data/
+/vrm_runtime/node_modules/
+gelistirme.flag
+*.yumipaket
+*.yumimodel

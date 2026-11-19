@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Yumi Reklam Atla",
+  "version": "1.2",
+  "description": "YouTube reklamında 'Atla' butonu çıkınca basar. Atlanamayan reklamlara dokunmaz.",
+  "content_scripts": [{
+    "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*"],
+    "js": ["atla.js"],
+    "run_at": "document_idle"
+  }],
+  "background": {"service_worker": "arka.js"},
+  "host_permissions": ["http://127.0.0.1:8766/*"]
+}

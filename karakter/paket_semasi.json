@@ -1,0 +1,74 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Yumi paket.json (.yumipaket, yumi-paket v1, G-F2 18 Kas 2026)",
+ "description": ".yumipaket = sıkıştırmasız (STORED) Zip64 arşiv. Kök: paket.json; karakterler/<Ad>/... (kurulumda <modeller>/<kategori>/<Ad>/, karakter klasörünün birebir hali); kategori_ortak/... (kurulumda <modeller>/<kategori>/_ortak/: guven.json, kaynaklar.json, LICENSES.md, arka_plan/ tema görselleri); ortak/<ad>/... (kurulumda <modeller>/_ortak/<ad>/, ör. meowko sesi). İmza yok: bütünlük 'dosyalar' listesindeki sha256 ile. Doğrulayan: karakter/paket_dogrula.py. Üreten: Yumi-Modeller/araclar/paketle.py.",
+ "type": "object",
+ "required": ["format", "bicim_surumu", "kategori", "paket", "yayinci", "yumi_calisma_zamani", "kisisel", "karakterler", "dosyalar"],
+ "properties": {
+  "format": {"const": "yumi-paket"},
+  "bicim_surumu": {"const": 1},
+  "kategori": {"type": "string", "pattern": "^[a-z][a-z0-9_]{1,30}$", "description": "Kurulum klasörü (anime, retro, witcher…)"},
+  "paket": {
+   "type": "object",
+   "required": ["ad", "surum"],
+   "properties": {
+    "ad": {"type": "string", "description": "Paket kimliği (dosya adının ilk kısmı)"},
+    "baslik": {"type": "string", "description": "Görünen ad (ör. 'Anime paketi')"},
+    "surum": {"type": "string", "pattern": "^[0-9A-Za-z][0-9A-Za-z.+_-]{0,31}$"}
+   }
+  },
+  "yayinci": {"type": "string"},
+  "olusturma": {"type": "string", "description": "ISO 8601 yerel zaman (bilgi)"},
+  "yumi_calisma_zamani": {"const": "yumi-v1", "description": "Gereken Yumi paket çalışma zamanı (paket_dogrula.CALISMA_ZAMANI)"},
+  "kisisel": {"type": "boolean", "description": "true = yalnız kişisel kullanım, dağıtılmaz (Witcher). Witcher kategorisi false olamaz."},
+  "ses_motoru": {
+   "type": ["object", "null"],
+   "description": "Paketteki karakterlerin ses motoru; hiç XTTS sesi yoksa null",
+   "properties": {
+    "ad": {"const": "xtts-v2"},
+    "taban_gerekli": {"type": "boolean", "description": "Ana modüldeki XTTS tabanı (config/vocab, temel.pth) gerekiyor mu (anime ince_ayar sesleri: evet; kendi config/vocab'ı olan sesler: hayır)"},
+    "taban_model": {
+     "type": ["object", "null"],
+     "properties": {
+      "yol": {"type": "string", "description": "Ana modülde göreli yol (models/_ortak/xtts_anime/temel.pth)"},
+      "boyut": {"type": "integer"},
+      "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+      "config_sha256": {"type": "string"},
+      "vocab_sha256": {"type": "string"}
+     }
+    }
+   }
+  },
+  "karakterler": {
+   "type": "array", "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": ["klasor", "ad"],
+    "properties": {
+     "klasor": {"type": "string", "description": "karakterler/<klasor>/"},
+     "ad": {"type": "string"},
+     "gorunumler": {"type": "array", "items": {"type": "string"}, "description": "vrm:<anahtar> listesi"},
+     "ses": {"type": ["string", "null"], "description": "karakter.json ses.tur"},
+     "boyut": {"type": "integer"}
+    }
+   }
+  },
+  "ortak": {"type": "array", "items": {"type": "string"}, "description": "Paketteki ortak/<ad>/ klasörleri"},
+  "dosyalar": {
+   "type": "array", "minItems": 1,
+   "description": "paket.json dışındaki HER dosya; eksik/fazla dosya reddedilir",
+   "items": {
+    "type": "object",
+    "required": ["yol", "boyut", "sha256"],
+    "properties": {
+     "yol": {"type": "string", "description": "Arşiv içi göreli yol, '/' ayraçlı; izinli kökler: karakterler/, kategori_ortak/, ortak/; uzantılar: .vrm .pth .json .wav .png .jpg .jpeg .webp .txt .md"},
+     "boyut": {"type": "integer", "minimum": 0},
+     "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    }
+   }
+  },
+  "toplam_boyut": {"type": "integer"},
+  "kabul": {"type": ["object", "null"], "description": "Kabul testi raporu (hareket/ses; DAGITIM Faz 2 CHECKS). F2'de koşulmadı → null"},
+  "imza": {"type": ["object", "string", "null"], "description": "AYRILMIŞ: ileride imza eklenebilsin diye. Bu sürüm üretmez (null) ve doğrulamaz."}
+ }
+}

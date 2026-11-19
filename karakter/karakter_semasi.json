@@ -1,0 +1,60 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Yumi karakter.json (yumi-karakter v1, G-A2 18 Kas 2026)",
+ "description": "Her karakter paketinin <kategori>/<Karakter>/karakter.json dosyası. Yumi kodu karakterleri yalnız bu dosyadan tanır (ad, ses, okunuş, ses profili, paket ve pakete özel davranışlar). Okuyan: karakter/karakterler.py.",
+ "type": "object",
+ "required": ["format", "surum", "ad", "kategori"],
+ "properties": {
+  "format": {"const": "yumi-karakter"},
+  "surum": {"const": 1},
+  "ad": {"type": "string", "description": "Karakterin görünen adı"},
+  "kategori": {"type": "string", "description": "Paket klasörü (anime, retro, witcher…)"},
+  "paket": {"type": "string", "description": "Pakete özel davranışların kapısı; yoksa kategori. \"witcher\" → seat_rig.witcher_package / witcher_motion / witcher_eyes yolları"},
+  "yerlesik": {"type": "boolean", "description": "Güven kaydı olmadan seçilebilir (paketle gelen özgün model)"},
+  "tur": {"enum": ["clippy"], "description": "Sprite karakter (VRM yerine agent.json + map.png); görünüm anahtarı skins.SPRITE"},
+  "okunuslar": {"type": "array", "items": {"type": "string"}, "description": "Adla çağırmada adın Türkçe/İngilizce okunuşları (wake_names)"},
+  "kisilik": {"type": "string", "description": "Karakter klasöründeki kişilik dosyası (yumi-kisilik)"},
+  "davranis": {"$ref": "#/$defs/davranis"},
+  "dagitim": {"type": "string", "description": "Bilgi notu (ör. yalnız kişisel kullanım)"},
+  "kaynak": {"type": "object", "description": "Kaynak/lisans bilgisi"},
+  "gorunumler": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": ["anahtar", "dosya"],
+    "properties": {
+     "anahtar": {"type": "string", "pattern": "^vrm:", "description": "Ayarlarda kullanılan kalıcı anahtar (vrm:<eski dosya adı>)"},
+     "dosya": {"type": "string", "description": "Karakter klasöründeki VRM dosyası (alt klasör yok)"},
+     "ad": {"type": "string"},
+     "varsayilan": {"type": "boolean", "description": "Hiç seçim yokken açılacak görünüm (skins.default_skin)"},
+     "profil": {"type": "object", "description": "Değiştirilemez ses profili (name, gender, speech_voice, voice, adult, size, immutable)"},
+     "davranis": {"$ref": "#/$defs/davranis"}
+    }
+   }
+  },
+  "ses": {
+   "type": "object",
+   "properties": {
+    "tur": {"enum": ["xtts_anime", "xtts_witcher", "meowko"]},
+    "id": {"type": "string"},
+    "klasor": {"type": "string", "description": "Karakter klasörüne göre ses klasörü (paketin _ortak'ına göreli olabilir)"},
+    "mod": {"type": "string", "description": "meowko: kawaii | deep"},
+    "ad": {"type": "string", "description": "Sesin görünen adı"},
+    "cins": {"enum": ["female", "male"]},
+    "varyant": {"type": "string", "description": "xtts_anime: varsayılan sürüm (ince_ayar, temel…)"},
+    "surumler": {"type": "array", "items": {"type": "string"}},
+    "eq_tiz_db": {"type": "number", "description": "Tiz yükseltme (dB)"}
+   }
+  }
+ },
+ "$defs": {
+  "davranis": {
+   "type": "object",
+   "description": "Pakete/karaktere özel davranış bayrakları (görünüm düzeyindeki karakter düzeyindekini ezer)",
+   "properties": {
+    "a27_oturma": {"type": "boolean", "description": "false: kullanıcı kabulü almış oturuş; Witcher A27 oturma/kitap/palto düzeltmeleri uygulanmaz"},
+    "otur_etek_dokum": {"type": "boolean", "description": "true: oturunca kalçadan asılı etek köşe dökümü (goruntu/seated_skirt.py; yalnız Witcher paketi)"}
+   }
+  }
+ }
+}

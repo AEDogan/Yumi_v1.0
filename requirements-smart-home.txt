@@ -1,0 +1,5 @@
+# Verified on the Yumi Python 3.12 Windows environment.
+python-miio==0.5.12
+androidtvremote2==0.3.2
+zeroconf==0.151.5
+cryptography>=44.0
