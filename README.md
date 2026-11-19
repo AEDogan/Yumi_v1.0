@@ -14,7 +14,6 @@ seçersin: masaüstünde yürür, koltuğa oturur, kendi sesiyle konuşur.
 - 🏠 **Akıllı ev** — ağdaki cihazları bulur, panelden ve sesle yönetir.
 - 🎵 **YouTube ve müzik** — reklam atlama eklentisiyle; müziğe göre hareket.
 - 🧍 **3D karakterler (VRM)** — masaüstünde gezinir, oturur, her karakter kendi sesiyle konuşur.
-- 📎 **Clippy** — klasik ofis asistanı, 43 animasyonuyla.
 
 ## Karakter paketleri
 Karakterler ayrı indirilir: **[Yumi Models → Releases](https://github.com/AEDogan/yumi-models/releases)**
